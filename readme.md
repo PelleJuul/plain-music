@@ -14,16 +14,22 @@ for short phrases of western music. I looks like this:
 { <CEG>_4 <EGc>_4 <Gce>+_2 <CEG>+2 }
 ```
 
+Without comments, spaces, and newlines it can be pretty space efficient, suitable for web applications:
+
+```
+[author Pelle Juul][meter 4/4][tempo 1/4 120]{CEG2(ce)/2GECC+4}{<CEG>_4<EGc>_4<Gce>+_2<CEG>+2}
+```
+
 The remainder of this document describes the format in further detail.
 
 ## Pitch
-The musical pitches are simply named by their corresponding letter
+The musical pitches are simply named by their corresponding letter:
 
 ```
 C D E F G A c d e f g a b
 ```
 
-`C` is middle c, `c` is an octave above. For higher and lower octaves, a caret `^` or underscore `_` is added: 
+`C` is middle c, `c` is an octave above. For higher and lower octaves, a caret `^` or underscore `_` is added:
 
 ```
 C_ D_ E_ F_ G_ A_ B_ C D E F G A B c d e f g a b c^ d^ e^ f^ g^ a^ b^ c^
@@ -46,19 +52,19 @@ A duration is always notated after the pitch. For example would a dotted eight n
 Rests are notated like pitches, but with the letter `R`. Rests are case insensitive, so `r` is also valid. Like notes, rests uses the default duration. Duration modifiers are applied the same way, so `r2` is a 2/4 rest, and `r/2` is a 1/8 rest. Pitch modifiers like `_`, `^` , and `+` does not affect rests.
 
 ## Grouping
-Musical pieces of contain sequences of notes in the same octave and/or with the same duration [citation needed]. To avoid having to write something like
+Musical pieces of contain sequences of notes in the same octave and/or with the same duration [citation needed]. To avoid having to write something like:
 
 ```
 C_/2 E-_/2 G_/2 C/2
 ```
 
-We can use a shorthand by writing the notes inside parentheses `()`, and applying the modifiers to the group. So, we can rewrite the music above as
+we can use a shorthand by writing the notes inside parentheses `()`, and apply the modifiers to the group. So, we can rewrite the music above as
 
 ```
 (C E- G c)_/2
 ```
 
-Groups can also contain rests, such as
+Groups can also contain rests:
 
 ```
 (C E- G R)_/2
@@ -89,7 +95,7 @@ A stave contains series of musical notes. The beginning and end of a stave is no
 
 is a stave containing an arpeggio of a C-Major chord. White space is generally between notes are ignored, so writing `{CEG2}` would be just as valid.
 
-There can be multiple staves in a piece of inline music, for example
+There can be multiple staves in a piece of inline music:
 
 ```
 { C  E G2}
@@ -107,13 +113,13 @@ is a C-Major arpeggio with a C-Major chord below. Notice that modifiers are appl
 
 ## Bar Lines
 
-Bar lines are written with the pipe character `|`. Bar lines are only included for human readability and is ignored by the computer. So, a to bar piece of music could be written like
+Bar lines are written with the pipe character `|`. Bar lines are only included for human readability and is ignored by the computer. So, a to bar piece of music could be written like:
 
 ```
 { C E G2 | G E C2 }
 ```
 
-Since bar lines are ignored we can also include beginning and ending bar lines.
+Since bar lines are ignored we can also include beginning and ending bar lines:
 
 ```
 { | C E G2 | G E C2 || }
@@ -121,7 +127,7 @@ Since bar lines are ignored we can also include beginning and ending bar lines.
 
 ## Commands
 
-A command contains extra information about how to interpret a stave. A command is written inside square brackets `[]` and consists of a keyword, possibly followed by one or more arguments. Commands are written outside staves and applies to all following staves. An example of commands could be 
+A command contains extra information about how to interpret a stave. A command is written inside square brackets `[]` and consists of a keyword, possibly followed by one or more arguments. Commands are written outside staves and applies to all following staves. An example of commands is:
 
 ```
 [title Two bar arpeggio on a C-Major chord]
@@ -159,6 +165,7 @@ Notation commands modify the way the music is interpreted.
 ```
 [key <modifiers>]
 ```
+
 The key of the music. Works much like a key signature in standard notation. The modifiers contains notes which should be sharpened or flattened. So if we want G major we would write `[key F+]`, to indicate that every time we write `F` we actually mean `F+`. If we wanted Eb major we would write `[key A-B-E-]`. This notation also allows for non-standard key signatures, for example we could write `[key G+]` for an A harmonic minor scale. No modifiers means that we´re playing without accidentals - C major and it's modes.
 
 ```
@@ -178,7 +185,7 @@ The meter or time signature of the music. Like standard notation it shows how ma
 Sets the tempo of the music, which is used for playback or when converting to other formats. It works much like a metronome mark in standard notation, so `[tempo 1/4 120]` means that we have 120 1/4 notes per minute.
 
 ## Comments
-Inline music can contain comments. A comment starts with a `#` and spans the rest of the line. For example
+Inline music can contain comments. A comment starts with a `#` and spans the rest of the line:
 
 ```
 # This is a piece with two staves and three comments
@@ -192,5 +199,7 @@ To encourage use of inline music, some tools should be created. Some ideas are:
 * *Sheet music generator:* should generate SVG or PNG images from inline music.
 * *MIDI converter:* should convert inline music to and from MIDI files.
 * *JavaScript parser/generator:* should enable developers to parse and generate inline music.
+* *Command line utility* should be able to perform common oprations such a minifying, prettyfying, and transposition.
+* *Sheet music web API* for including inline music notated sheet music in blogs and websites.
 * *Webplayer:* a HTML/JavaScipt component for inline music playback. 
 * *Writer web app:* a web app for writing inline music in a user-friendly fashion.
