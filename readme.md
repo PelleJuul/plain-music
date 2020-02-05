@@ -1,5 +1,5 @@
 # Plain Music
-*Plain Music* is a text format for writing music. It uses only ASCII characters, it is terse, regular, readable by humans, and easy to parse and generate for machines. For a full writeup of the format read the article [here](https://pellejuul.github.io/drafts/2017-03-08-plain-music-notation.html).
+*Plain Music* is a text format for writing music. It uses only ASCII characters, it is terse, regular, readable by humans, and easy to parse and generate for machines. For a full writeup of the format read the article [here](https://pellejuul.github.io/posts/2017/03/12/writing-music-in-plain-text.html).
 
 This repository doesn't not contain any code, but acts as a gateway for *Plain Music* resources.
 
